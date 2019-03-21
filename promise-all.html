@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //all(与,只要有一个状态为rejected则返回rejected)
+         /* var p1=Promise.resolve(1),
+            p2=Promise.resolve(2),
+            p3=Promise.reject(3);
+            Promise.all([p1,p2,p3]).then((res)=>{
+                console.log(res);
+            }).catch((err)=>{
+                console.log(err);
+            }) */
+
+            let p1=new Promise((resolve)=>{
+                setTimeout(()=>{
+                    console.log('1s');
+                    resolve(1);
+                },1000)
+            })
+            let p10=new Promise((resolve)=>{
+                setTimeout(()=>{
+                    console.log('10s');
+                    resolve(10);
+                },10000)
+            })
+            let p5=new Promise((resolve)=>{
+                setTimeout(()=>{
+                    console.log('5s');
+                    resolve(5);
+                },5000)
+            })
+            Promise.all([p1,p10,p5]).then((res)=>{
+                console.log(res);
+            })
+    </script>
+</body>
+</html>

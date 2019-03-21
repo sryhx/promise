@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* const fn=new Promise(function(resolve,reject){
+            setTimeout(()=>{
+                let num=Math.ceil(Math.random()*10)
+                if(num>5){
+                    resolve(num);
+                }else{
+                    reject(num);
+                }
+            },2000)
+        })
+        fn.then((res)=>{
+            console.log(res);
+        },(err)=>{
+            console.log(err);
+        }) */
+
+        /* fn = new Promise(function (resolve, reject) {
+        let num = Math.ceil(Math.random() * 10)
+        if (num > 5) {
+            resolve(num)
+        } else {
+            reject(num)
+        }
+        })
+        // 第一次回调
+        fn.then((res)=>{
+        console.log(`res==>${res}`)
+        return new Promise((resolve,reject)=>{
+            if(2*res>15){
+            resolve(2*res)
+            }else{
+            reject(2*res)
+            }
+        })
+        },(err)=>{
+        console.log(`err==>${err}`)
+        }).then((res)=>{ // 第二次回调
+        console.log(res)
+        },(err)=>{
+        console.log(`err==>${err}`)
+        }) */
+       
+       //.then方法(异步执行)
+       /* const promise=new Promise((resolve,reject)=>{
+           resolve('fulfilled');
+       });
+       promise.then(result=>{
+           console.log(result);
+       },reason=>{
+
+       }) */
+
+       /* const promise=new Promise((resolve,reject)=>{
+           reject('rejected');
+       });
+       promise.then(result=>{
+
+       },reason=>{
+           console.log(result);
+       }) */
+       //.catch(可以捕捉then的发送异常)
+       fn=new Promise(function(resolve,reject){
+           let num=Math.ceil(Math.random()*10)
+           if(num>5){
+               resolve(num);
+           }else{
+               reject(num);
+           }
+       })
+       fn.then((res)=>{
+           console.log(res);
+       }).catch((err)=>{
+           console.log(`err==>${err}`)
+       })
+
+       
+    </script>
+    
+</body>
+</html>
