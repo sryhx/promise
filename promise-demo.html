@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* const promise=new Promise((reslove,reject)=>{
+            console.log(1);
+            reslove();
+            console.log(2);
+        });
+        promise.then(()=>{
+            console.log(3);
+        });
+        console.log(4);
+        //1 2 4 3 */
+
+
+        /* const promise=new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve('success');
+                reject('error');
+            },1000)
+        })
+        promise.then((res)=>{
+            console.log(res);
+        },(err)=>{
+            console.log(err);
+        })//success */
+
+
+        /* const promise=new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log('开始');
+                resolve('success');
+            },5000);
+        })
+        const start=Date.now();
+        promise.then((res)=>{
+            console.log(res,Date.now()-start);
+        })
+        promise.then((res)=>{
+            console.log(res,Date.now()-start);
+        });//开始  success 5002   success 5002
+         */
+
+        /* let p1 = new Promise((resolve,reject)=>{
+        let num = 6
+        if(num<5){
+            console.log('resolve1')
+            resolve(num)
+        }else{
+            console.log('reject1')
+            reject(num)
+        }
+        })
+        p1.then((res)=>{
+        console.log('resolve2')
+        console.log(res)
+        },(rej)=>{
+        console.log('reject2')
+        let p2 = new Promise((resolve,reject)=>{
+            if(rej*2>10){
+            console.log('resolve3')
+            resolve(rej*2)
+            }else{
+            console.log('reject3')
+            reject(rej*2)
+            }
+        })
+        　　return p2;
+        }).then((res)=>{
+        console.log('resolve4')
+        console.log(res)
+        },(rej)=>{
+        console.log('reject4')
+        console.log(rej)
+        }) */
+        /* 
+        reject1  
+        reject2
+        resolve3
+        resolve4
+        12
+         */
+
+        function Promise(fn){
+        var status = 'pending'//初始状态
+        function successNotify(){
+            status = 'fulfilled'//调用成功时pending转为fulfilled
+            toDoThen.apply(undefined, arguments)
+        }
+        function failNotify(){
+            status = 'rejected'//调用失败时pending转为rejected
+            toDoThen.apply(undefined, arguments)
+        }
+        function toDoThen(){
+            setTimeout(()=>{
+                if(status === 'fulfilled'){
+                    for(let i =0; i< successArray.length;i ++)    {
+                        successArray[i].apply(undefined, arguments)
+                    }
+                }else if(status === 'rejected'){
+                    for(let i =0; i< failArray.length;i ++)    {
+                        failArray[i].apply(undefined, arguments)
+                    }
+                }
+            })
+        }
+        var successArray = []
+        var failArray = []
+        fn.call(undefined, successNotify, failNotify)
+        return {
+            then: function(successFn, failFn){
+                successArray.push(successFn)
+                failArray.push(failFn)
+                return undefined 
+            }
+        }
+        }
+
+    </script>
+</body>
+</html>
