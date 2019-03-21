@@ -18,11 +18,11 @@
                 console.log(err);
             }) */
 
-            let p1=new Promise((resolve)=>{
+           /*  let p1=new Promise((resolve)=>{
                 setTimeout(()=>{
-                    console.log('1s');
-                    resolve(1);
-                },1000)
+                    console.log('6s');
+                    resolve(6);
+                },6000)
             })
             let p10=new Promise((resolve)=>{
                 setTimeout(()=>{
@@ -35,10 +35,38 @@
                     console.log('5s');
                     resolve(5);
                 },5000)
-            })
-            Promise.all([p1,p10,p5]).then((res)=>{
+            }) */
+            /* race    all
+            race谁先执行返回谁的状态和结果
+             
+           /*  Promise.race([p1,p10,p5]).then((res)=>{
+                console.log(res);//5
+                //5s 5  6s  10s 
+             /* Promise.all([p1,p10,p5]).then((res)=>{
+                console.log(res); 
+                //5s  6s  10s  6,10,5     
+            }) */
+
+
+            //请求某个图片资源
+            let requestImg = new Promise(function(resolve, reject){
+                    var img = new Image();
+                    img.onload = function(){
+                        resolve(img);
+                    }
+                });
+            //延时函数，用于给请求计时
+            let timeOut = new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        reject('图片请求超时');
+                    }, 5000);
+                });
+
+            Promise.race([requestImg, timeOut]).then((res)=>{
                 console.log(res);
-            })
+            }).catch((err)=>{
+                console.log(err);
+            });
     </script>
 </body>
 </html>
